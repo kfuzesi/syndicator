@@ -8,7 +8,7 @@ from resources import *
 
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return "Hello!"
 
 def setup_resources(api):
     api.add_resource(HelloWorld, '/', '/hello')
