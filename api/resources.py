@@ -2,6 +2,8 @@ import uuid
 
 from flask import jsonify, make_response, request, json
 from flask_restful import Resource
+from sqlalchemy import Time, cast
+
 from tables import *
 
 def make_error(message, code):
@@ -86,7 +88,8 @@ class EventList(Resource):
 
     def post(self):
         data = request.get_json()
-
+        print(request)
+        print(data)
         # check for required parameters
         if not data:
             return make_error("Need json data", 400)
@@ -160,3 +163,19 @@ class Event(Resource):
             return make_response(jsonify({'message': 'Event was deleted'}), 200)
         else:
             return make_error("Event with id '" + str(id) + "' does not exist", 400)
+
+class RecentEventList(Resource):
+
+    def get(self):
+        recent_events = EventDB.query.filter(EventDB.syndicated == False)
+        return jsonify([s.to_dict() for s in recent_events])
+
+class RecentEvent(Resource):
+
+    # update events to syndicated=True
+    def put(self, id):
+        syndicated_rows = EventDB.query.filter_by(id=id).update(dict(syndicated=True))
+        db.session.commit()
+
+        return jsonify(syndicated_rows)
+

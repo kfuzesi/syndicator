@@ -22,10 +22,12 @@ class ProductDB(BaseDB):
     description = db.Column(db.String(500), nullable=True)
     organizer_id = db.Column(db.String(50), nullable=True)
     price = db.Column(db.Float)
+    syndicated = db.Column(db.Boolean, default=False)
 
 class EventDB(BaseDB):
     __tablename__ = 'event'
     id = db.Column(db.String, primary_key=True, unique=True)
+    created = db.Column(db.DateTime, default=datetime.utcnow)
     name = db.Column(db.String(50))
     description = db.Column(db.String(500), nullable=True)
     organizer_id = db.Column(db.String(50), nullable=True)
@@ -34,3 +36,4 @@ class EventDB(BaseDB):
     start_timezone = db.Column(db.String(50))
     end_time = db.Column(db.DateTime, default=datetime.utcnow)
     end_timezone = db.Column(db.String(50))
+    syndicated = db.Column(db.Boolean, default=False)
