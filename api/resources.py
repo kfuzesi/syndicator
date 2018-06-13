@@ -2,6 +2,8 @@ import uuid
 
 from flask import jsonify, make_response, request, json
 from flask_restful import Resource
+from flask_cors import cross_origin
+
 from sqlalchemy import Time, cast
 
 from tables import *
