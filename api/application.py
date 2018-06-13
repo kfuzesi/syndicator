@@ -17,19 +17,20 @@ def setup_resources(api):
     api.add_resource(EventList, '/events')
     api.add_resource(Event, '/events/<id>', endpoint='event')
 
-def create_app(app_name='SYNDICATOR_API'):
-    app = Flask(app_name)
-    app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///../syndicator_repo.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+def create_app():
+    application = Flask(__name__)
+    application.config['SQLALCHEMY_DATABASE_URI']='sqlite:///../syndicator_repo.db'
+    application.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
-    db.init_app(app)
-    db.create_all(app=app)
+    db.init_app(application)
+    db.create_all(app=application)
 
-    api = Api(app)
+    api = Api(application)
     setup_resources(api)
 
-    return app
+    return application
 
 if __name__ == "__main__":
-    app = create_app()
-    app.run()
+    application = create_app()
+    application.debug = True
+    application.run()
