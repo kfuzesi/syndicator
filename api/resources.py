@@ -122,8 +122,6 @@ class EventList(Resource):
         id = str(uuid.uuid4())
         start_time = datetime.strptime(data['start_time'], '%Y-%m-%dT%I:%M:%S')
         end_time = datetime.strptime(data['end_time'], '%Y-%m-%dT%I:%M:%S')
-        print start_time
-        print end_time
 
         # save to database
         event = EventDB(id=id, name=data['name'], price=data['price'],
