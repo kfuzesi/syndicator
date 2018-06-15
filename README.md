@@ -29,6 +29,8 @@ but I couldn't figure out the bug.
 Examples:
 
 curl -X GET http://localhost:5000/events
+
 curl -X GET http://localhost:5000/events/<id>
+
 curl -X POST http://localhost:5000/events -H 'Content-Type: application/json' -d '{"name":"event2","price":"99.99","start_time":"2018-06-20T06:00:00","start_timezone":"America/New_York","end_time":"2018-06-20T10:00:00","end_timezone":"America/New_York","currency":"USD"}'
 
