@@ -1,7 +1,7 @@
 
 import threading
-from integration import *
 from datetime import datetime
+import requests
 
 def syndicate(new_event):
     print("SYNDICATING...")
@@ -38,5 +38,5 @@ def check_db(interval):
     for new_event in data.json():
         if syndicate(new_event) == 200:
             put_url = base_url + "/" + str(new_event['id'])
-            api_put(put_url, None)
-    threading.Timer(interval, check_db, [60]).start()
+            requests.put(put_url)
+    threading.Timer(interval, check_db, [interval]).start()
