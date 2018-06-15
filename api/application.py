@@ -26,7 +26,7 @@ def setup_resources(api):
 
 def create_app():
     application = Flask(__name__)
-    CORS(application)
+    CORS(application, resources={r"/*": {"origins": "*"}})
 
     application.config['SQLALCHEMY_DATABASE_URI']='sqlite:///../syndicator_repo.db'
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False

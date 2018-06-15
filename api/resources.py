@@ -114,6 +114,9 @@ class EventList(Resource):
         if not data.has_key('end_timezone'):
             return make_error("Need parameter 'end_timezone'", 400)
 
+        if not data.has_key('currency'):
+            return make_error("Need parameter 'currency'", 400)
+
         # optional inputs
         description = None
         if data.has_key('description'):
@@ -132,7 +135,8 @@ class EventList(Resource):
         event = EventDB(id=id, name=data['name'], price=data['price'],
                             description=description, organizer_id=organizer_id,
                             start_time=start_time, start_timezone=data['start_timezone'],
-                            end_time=end_time, end_timezone=data['end_timezone'])
+                            end_time=end_time, end_timezone=data['end_timezone'],
+                            currency=data['currency'])
         db.session.add(event)
         db.session.commit()
 

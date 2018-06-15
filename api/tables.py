@@ -36,4 +36,5 @@ class EventDB(BaseDB):
     start_timezone = db.Column(db.String(50))
     end_time = db.Column(db.DateTime, default=datetime.utcnow)
     end_timezone = db.Column(db.String(50))
+    currency = db.Column(db.String(50))
     syndicated = db.Column(db.Boolean, default=False)
